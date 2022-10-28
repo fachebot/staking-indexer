@@ -1,0 +1,28 @@
+type Token {
+	Name     string `json:"name"`
+	Symbol   string `json:"symbol"`
+	Decimals uint8  `json:"decimals"`
+	Contract string `json:"contract"`
+}
+
+type PoolInfo {
+	StakeToken          Token  `json:"stake_token"`
+	RewardToken         Token  `json:"reward_token"`
+	TokenPerBlock       string `json:"token_per_block"`
+	StartBlock          uint64 `json:"start_block"`
+	EndBlock            uint64 `json:"end_block"`
+	StartBlockTimestamp *int64 `json:"start_block_timestamp,omitempty"`
+	EndBlockTimestamp   *int64 `json:"start_block_timestamp,omitempty"`
+}
+
+type GetPoolRequest {
+}
+
+type GetPoolResponse {
+	Pool PoolInfo `json:"pool"`
+}
+
+service indexer-api {
+	@handler GetPoolHandler
+	get /pool(GetPoolRequest) returns (GetPoolResponse)
+}
